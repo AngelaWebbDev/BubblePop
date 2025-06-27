@@ -16,7 +16,6 @@ html, body {
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-    /* z-index: 1001; */
     box-sizing: border-box;
     display: flex;
 }
@@ -76,7 +75,6 @@ html, body {
     border: var(--border);
     border-image-slice: 1;
     border-image-source: var(--gradient);
-    /* z-index: 1000; */
 
     /* adjustments from overlay deletion */
     display: flex;
@@ -101,7 +99,6 @@ html, body {
     border-radius: 50%;
     pointer-events: none;
     opacity: 0.5;
-    z-index: 1500;
 } */
 
 /* score display at end of game */
