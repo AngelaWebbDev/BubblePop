@@ -7,7 +7,6 @@ let gameStarted = false;
 const gamespace = document.getElementById("gamespace");
 const scoreDisplay = document.getElementById("score");
 const quitButton = document.getElementById("quit");
-const overlay = document.getElementById("overlay");
 const startBox = document.getElementById("start-box");
 const finalScoreBox = document.getElementById("final-score-box");
 const finalScoreValue = document.getElementById("final-score-value");
@@ -223,7 +222,6 @@ function startGame() {
     });
     circles = [];
     gameStarted = true;
-    overlay.style.display = "none";
     document.getElementById("ui-bar").classList.add("active");
 
     if (circleInterval) clearInterval(circleInterval);
@@ -278,7 +276,6 @@ function quitGame() {
     finalScoreValue.textContent = score;
     finalScoreBox.style.display = "block";
     startBox.style.display = "none";
-    overlay.style.display = "flex";
     document.getElementById("ui-bar").classList.remove("active");
 }
 
@@ -295,7 +292,6 @@ quitButton.addEventListener("click", () => {
 playAgainButton.addEventListener("click", () => {
     finalScoreBox.style.display = "none";
     startBox.style.display = "none";
-    overlay.style.display = "none";
     startGame();
 });
 
