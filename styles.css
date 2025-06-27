@@ -6,88 +6,82 @@ html, body {
     background-color: #fff;
 }
 
-/* top bar general setup */
 #ui-bar {
+    /* top bar general setup */
     position: fixed;
     top: 0;
     width: 100vw;
     height: 50px;
-    background-color: black;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
     box-sizing: border-box;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    padding: 0 20px;
 }
 
-/* missed circles count in top bar */
-#missed {
+#ui-bar.active #score,
+#ui-bar.active #stopGame {
+    /* top bar active */
+    visibility: visible;
+}
+
+#missed {  
+    /* missed circles count in top bar */
     color: #bb4f4f;
     font-size: 18px;
-    /* 3/4 of 24px */
     font-weight: bold;
     user-select: none;
 }
 
-/* top bar active */
-#ui-bar.active #score,
-#ui-bar.active #stopGame {
-    visibility: visible;
-}
-
-/* score tracker in top bar */
 #score {
+    /* score tracker in top bar */
+    position: absolute;
+    left: 50%;
     color: green;
     font-size: 24px;
     font-weight: bold;
     user-select: none;
-    position: absolute;
-    left: 50%;
     transform: translateX(-50%);
     pointer-events: none;
 }
 
-/* stop game and stopGame app buttons */
 #stopGame, #final-quit {
-    padding: 5px 10px;
+    /* stop game and stopGame app buttons */
     background-color: rgb(144, 3, 3);
+    padding: 5px 10px;
     color: black;
+    font-size: 18px;
     font-weight: bold;
     border: none;
-    cursor: pointer;
-    font-size: 18px;
-    user-select: none;
     border-radius: 20px;
+    cursor: pointer;
+    user-select: none;
 }
 
-/* game play area */
 #gamespace {
+    /* game play area */
     position: fixed;
-    top: 50px; /* offset down by ui-bar height */
+    top: 50px; /* offset of ui-bar height */
     left: 0;
     width: 100vw;
-    height: calc(100vh - 50px); /* full viewport height minus ui-bar */
+    height: calc(100vh - 50px); /* space for ui-bar */
     box-sizing: border-box;
-    overflow: hidden;
-    background-color: black;
-    --border: 5px solid transparent;
-    --gradient: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
-    border: var(--border);
-    border-image-slice: 1;
-    border-image-source: var(--gradient);
-
-    /* adjustments from overlay deletion */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: green;
     text-align: center;
-    box-sizing: border-box;
+    overflow: hidden;
+    background-color: black;
+    border: 5px solid transparent;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    color: green;
 }
 
-/* individual circles */
 .circle {
+    /* individual circles */
     position: absolute;
     border-radius: 50%;
     pointer-events: auto;
@@ -101,60 +95,59 @@ html, body {
     opacity: 0.5;
 } */
 
-/* score display at end of game */
 #final-score-box {
-    /* background: #222; */
-    padding: 30px;
-    border-radius: 10px;
-    min-width: 260px;
+    /* score display at end of game */
     display: none;
+    border-radius: 10px;
+    padding: 30px;
+    min-width: 260px;
 }
 
-/* "Final Score" in post-game display */
 #final-score-box h1 {
+    /* "Final Score" in post-game display */
     margin: 0;
     font-size: 32px;
 }
 
-/* score in display after quit game */
 #final-score-box p {
+    /* score in display after quit game */
     font-size: 24px;
     margin: 10px 0 20px;
     word-break: break-word;
 }
 
-/* information box at startup */
 #start-box {
-    padding: 30px;
-    border-radius: 10px;
-    text-align: center;
+    /* information box at startup */
     background: none;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
 }
 
-/* instructions in start box at startup */
 #start-box p {
+    /* instructions in start box at startup */
     font-size: 18px;
     margin-bottom: 20px;
 }
 
-/* start game button in startup box */
 #startBtn {
+    /* start game button in startup box */
+    background-color: green;
+    border: none;
+    border-radius: 20px;
     font-size: 18px;
     padding: 10px 20px;
     cursor: pointer;
-    border-radius: 20px;
-    background-color: green;
     color: white;
-    border: none;
 }
 
-/* play again button in display at end of game */
 #play-again {
-    font-size: 16px;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 20px;
+    /* play again button in display at end of game */
     background-color: green;
-    color: white;
     border: none;
+    border-radius: 20px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px 10px;
 }
