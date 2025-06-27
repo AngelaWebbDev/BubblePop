@@ -48,13 +48,11 @@ function createCircle() {
     circle.style.backgroundColor = randomColor();
     // spawn circle at small size
     const size = 10;
-    circle.style.width = `${size}px`;
-    circle.style.height = `${size}px`;
-    circle.style.left = `${x - size / 2}px`;
-    circle.style.top = `${y - size / 2}px`;
+    circle.style.width = circle.style.height = `${size}px`;
+    circle.style.left = circle.style.top = `${x - size / 2}px`;
     //set circle
     gamespace.appendChild(circle);
-    //
+    //store element name, coordinates, size, existence data
     const circleData = {
         element: circle,
         x,
@@ -123,7 +121,7 @@ function getSafePosition(minDistance = 50, maxAttempts = 100) {
     while (attempt < maxAttempts) {
         const x = borderBuffer + Math.random() * (width - 2 * borderBuffer);
         const y = borderBuffer + Math.random() * (height - 2 * borderBuffer);
-        
+
         if (isFarFromRecent(x, y, minDistance)) {
             storePosition(x, y);
             return { x, y };
