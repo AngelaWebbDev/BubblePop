@@ -32,7 +32,7 @@ html, body {
 
 /* top bar active */
 #ui-bar.active #score,
-#ui-bar.active #quit {
+#ui-bar.active #stopGame {
     visibility: visible;
 }
 
@@ -48,8 +48,8 @@ html, body {
     pointer-events: none;
 }
 
-/* stop game and quit app buttons */
-#quit, #final-quit {
+/* stop game and stopGame app buttons */
+#stopGame, #final-quit {
     padding: 5px 10px;
     background-color: rgb(144, 3, 3);
     color: black;

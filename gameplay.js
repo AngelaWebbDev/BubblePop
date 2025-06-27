@@ -11,7 +11,7 @@ const finalScoreValue = document.getElementById("final-score-value");
 const gamespace = document.getElementById("gamespace");
 const missedDisplay = document.getElementById("missed");
 const playAgainButton = document.getElementById("play-again");
-const quitButton = document.getElementById("quit");
+const stopGameBtn = document.getElementById("stopGame");
 const scoreDisplay = document.getElementById("score");
 const startBox = document.getElementById("start-box");
 const startButton = document.getElementById("startBtn");
@@ -296,8 +296,8 @@ startButton.addEventListener("click", () => {
     startGame();
 });
 
-// end game when 'quitButton' is clicked, but leave app open
-quitButton.addEventListener("click", () => {
+// end game when 'stopGameBtn' is clicked, but leave app open
+stopGameBtn.addEventListener("click", () => {
     quitGame();
 });
 
