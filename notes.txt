@@ -1,0 +1,13 @@
+clean it up
+fix the z-index numbering
+
+?   start large, shrink, higher score for clicking as late as possible
+
+start menu:
+    (1) bubble pop - circles look like bubbles
+    (2) color pop - each circle is a different color
+                    pop a certain color
+                    array of limited colors
+                    every 10? 20? correct pops, change the color
+                    periodically, increase speed of appearance
+
