@@ -116,10 +116,14 @@ function gameLoop() {
 function getSafePosition(minDistance = 50, maxAttempts = 100) {
     const width = gamespace.clientWidth;
     const height = gamespace.clientHeight;
+    const borderBuffer = 100;
+
     let attempt = 0;
+    
     while (attempt < maxAttempts) {
-        const x = Math.random() * width;
-        const y = Math.random() * height;
+        const x = borderBuffer + Math.random() * (width - 2 * borderBuffer);
+        const y = borderBuffer + Math.random() * (height - 2 * borderBuffer);
+        
         if (isFarFromRecent(x, y, minDistance)) {
             storePosition(x, y);
             return { x, y };
