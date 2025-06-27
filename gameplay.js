@@ -170,17 +170,18 @@ function adjustInterval() {
 
 // circles increase in size
 function growCircles() {
+    const bounds = gamespace.getBoundingClientRect();
+
     for (const c of circles) {
         if (!c.growing) continue;
         let newSize = c.size + 1;
 
-        // check if circle edge touches viewport edges or border of gamespace (5px border), remove if true
-        const radius = newSize / 2;
+        // check if circle edge touches border of gamespace, remove if true
         if (
-            c.x - radius <= 5 ||
-            c.y - radius <= 5 ||
-            c.x + radius >= gamespace.clientWidth - 5 ||
-            c.y + radius >= gamespace.clientHeight - 5
+            c.x - radius <= bounds.left ||
+            c.y - radius <= bounds.top ||
+            c.x + radius >= bounds.right ||
+            c.y + radius >= bounds.bottom
         ) {
             removeCircle(c);
             continue;
