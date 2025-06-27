@@ -1,157 +1,163 @@
-    html,
-    body {
-        margin: 0;
-        height: 100%;
-        overflow: hidden;
-        font-family: sans-serif;
-        background-color: #fff;
-    }
+html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: sans-serif;
+    background-color: #fff;
+}
 
-    #ui-bar {
-        position: fixed;
-        top: 0;
-        width: 100vw;
-        height: 50px;
-        background-color: black;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 20px;
-        z-index: 1001;
-        box-sizing: border-box;
-        display: flex;
-    }
+/* top bar general setup */
+#ui-bar {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 50px;
+    background-color: black;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 1001;
+    box-sizing: border-box;
+    display: flex;
+}
 
-    #missed {
-        color: #bb4f4f;
-        font-size: 18px;
-        /* 3/4 of 24px */
-        font-weight: bold;
-        user-select: none;
-    }
+/* missed circles count in top bar */
+#missed {
+    color: #bb4f4f;
+    font-size: 18px;
+    /* 3/4 of 24px */
+    font-weight: bold;
+    user-select: none;
+}
 
-    #ui-bar.active #score,
-    #ui-bar.active #quit {
-        visibility: visible;
-    }
+/* top bar active */
+#ui-bar.active #score,
+#ui-bar.active #quit {
+    visibility: visible;
+}
 
-    #score {
-        color: green;
-        font-size: 24px;
-        font-weight: bold;
-        user-select: none;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        pointer-events: none;
-    }
+/* score tracker in top bar */
+#score {
+    color: green;
+    font-size: 24px;
+    font-weight: bold;
+    user-select: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
 
-    #quit, #final-quit {
-        padding: 5px 10px;
-        background-color: rgb(144, 3, 3);
-        color: black;
-        font-weight: bold;
-        border: none;
-        cursor: pointer;
-        font-size: 18px;
-        user-select: none;
-        border-radius: 20px;
-    }
+/* stop game and quit app buttons */
+#quit, #final-quit {
+    padding: 5px 10px;
+    background-color: rgb(144, 3, 3);
+    color: black;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    user-select: none;
+    border-radius: 20px;
+}
 
-    #gamespace {
-        position: fixed;
-        top: 50px; /* offset down by ui-bar height */
-        left: 0;
-        width: 100vw;
-        height: calc(100vh - 50px); /* full viewport height minus ui-bar */
-        box-sizing: border-box;
-        overflow: hidden;
-        background-color: black;
-        --border: 5px solid transparent;
-        --gradient: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
-        border: var(--border);
-        border-image-slice: 1;
-        border-image-source: var(--gradient);
-        z-index: 1000;
+/* game play area */
+#gamespace {
+    position: fixed;
+    top: 50px; /* offset down by ui-bar height */
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 50px); /* full viewport height minus ui-bar */
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: black;
+    --border: 5px solid transparent;
+    --gradient: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    border: var(--border);
+    border-image-slice: 1;
+    border-image-source: var(--gradient);
+    z-index: 1000;
 
-        /* adjustments from overlay deletion */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        color: green;
-        text-align: center;
-        box-sizing: border-box;
-    }
+    /* adjustments from overlay deletion */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: green;
+    text-align: center;
+    box-sizing: border-box;
+}
 
-    .circle {
-        position: absolute;
-        border-radius: 50%;
-        pointer-events: auto;
-    }
+/* individual circles */
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: auto;
+}
 
-    .bg-circle {
-        position: absolute;
-        border-radius: 50%;
-        pointer-events: none;
-        opacity: 0.5;
-        z-index: 1500;
-    }
+/* end of game background circles */
+/* .bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.5;
+    z-index: 1500;
+} */
 
+/* score display at end of game */
+#final-score-box {
+    /* background: #222; */
+    padding: 30px;
+    border-radius: 10px;
+    min-width: 260px;
+    display: none;
+}
 
-    #final-score-box {
-        /* background: #222; */
-        padding: 30px;
-        border-radius: 10px;
-        min-width: 260px;
-        display: none;
-    }
+/* "Final Score" in post-game display */
+#final-score-box h1 {
+    margin: 0;
+    font-size: 32px;
+}
 
-    #final-score-box h1 {
-        margin: 0;
-        font-size: 32px;
-    }
+/* score in display after quit game */
+#final-score-box p {
+    font-size: 24px;
+    margin: 10px 0 20px;
+    word-break: break-word;
+}
 
-    #final-score-box p {
-        font-size: 24px;
-        margin: 10px 0 20px;
-        word-break: break-word;
-    }
+/* information box at startup */
+#start-box {
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    background: none;
+}
 
-    /* #final-score-box button {
-        margin: 5px;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-    } */
+/* instructions in start box at startup */
+#start-box p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
 
-    #start-box {
-        padding: 30px;
-        border-radius: 10px;
-        text-align: center;
-        background: none;
-    }
+/* start game button in startup box */
+#startBtn {
+    font-size: 18px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 20px;
+    background-color: green;
+    color: white;
+    border: none;
+}
 
-    #start-box p {
-        font-size: 18px;
-        margin-bottom: 20px;
-    }
-
-    #startBtn {
-        font-size: 18px;
-        padding: 10px 20px;
-        cursor: pointer;
-        border-radius: 20px;
-        background-color: green;
-        color: white;
-        border: none;
-    }
-    
-    #play-again {
-        font-size: 16px;
-        padding: 5px 10px;
-        cursor: pointer;
-        border-radius: 20px;
-        background-color: green;
-        color: white;
-        border: none;
-    }
+/* play again button in display at end of game */
+#play-again {
+    font-size: 16px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 20px;
+    background-color: green;
+    color: white;
+    border: none;
+}
