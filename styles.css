@@ -59,20 +59,18 @@
 
     #gamespace {
         position: fixed;
-        top: 50px;
-        /* offset down by ui-bar height */
+        top: 50px; /* offset down by ui-bar height */
         left: 0;
         width: 100vw;
-        height: calc(100vh - 50px);
-        /* full viewport height minus ui-bar */
+        height: calc(100vh - 50px); /* full viewport height minus ui-bar */
         box-sizing: border-box;
         overflow: hidden;
         background-color: black;
-        /* --border: 5px solid transparent;
+        --border: 5px solid transparent;
         --gradient: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
         border: var(--border);
         border-image-slice: 1;
-        border-image-source: var(--gradient); */
+        border-image-source: var(--gradient);
         z-index: 1000;
     }
 
@@ -105,9 +103,6 @@
         justify-content: center;
         align-items: center;
         box-sizing: border-box;
-        /* border: var(--border);
-        border-image-slice: 1;
-        border-image-source: var(--gradient); */
     }
 
     #final-score-box {
@@ -148,7 +143,7 @@
         margin-bottom: 20px;
     }
 
-    #start-button {
+    #startBtn {
         font-size: 18px;
         padding: 10px 20px;
         cursor: pointer;
