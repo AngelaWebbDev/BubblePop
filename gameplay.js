@@ -13,7 +13,7 @@ const finalScoreBox = document.getElementById("final-score-box");
 const finalScoreValue = document.getElementById("final-score-value");
 const playAgainButton = document.getElementById("play-again");
 const finalQuitButton = document.getElementById("final-quit");
-const startButton = document.getElementById("start-button");
+const startButton = document.getElementById("startBtn");
 
 function isFarFromRecent(x, y, minDistance) {
     return recentPositions.every(pos => {
