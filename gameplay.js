@@ -1,19 +1,22 @@
-let recentPositions = [];
-let circles = [];
-let score = 0;
 let circleInterval = null;
+let circles = [];
 let gameStarted = false;
+let missedCount = 0;
+let recentPositions = [];
+let score = 0;
 
-const gamespace = document.getElementById("gamespace");
-const scoreDisplay = document.getElementById("score");
-const quitButton = document.getElementById("quit");
-const startBox = document.getElementById("start-box");
+const finalQuitButton = document.getElementById("final-quit");
 const finalScoreBox = document.getElementById("final-score-box");
 const finalScoreValue = document.getElementById("final-score-value");
+const gamespace = document.getElementById("gamespace");
+const missedDisplay = document.getElementById("missed");
 const playAgainButton = document.getElementById("play-again");
-const finalQuitButton = document.getElementById("final-quit");
+const quitButton = document.getElementById("quit");
+const scoreDisplay = document.getElementById("score");
+const startBox = document.getElementById("start-box");
 const startButton = document.getElementById("startBtn");
 
+// check if new spawn point is near recent spawn points
 function isFarFromRecent(x, y, minDistance) {
     return recentPositions.every(pos => {
         const dx = pos.x - x;
@@ -22,6 +25,7 @@ function isFarFromRecent(x, y, minDistance) {
     });
 }
 
+// manage array of spawn positions for spawn spacing control
 function storePosition(x, y) {
     recentPositions.push({ x, y });
     if (recentPositions.length > 5) {
@@ -29,6 +33,7 @@ function storePosition(x, y) {
     }
 }
 
+// prevent spawning near other circles on screen (previous 5 spawns)
 function getSafePosition(minDistance = 50, maxAttempts = 100) {
     const width = gamespace.clientWidth;
     const height = gamespace.clientHeight;
@@ -42,19 +47,16 @@ function getSafePosition(minDistance = 50, maxAttempts = 100) {
         }
         attempt++;
     }
-    // fallback center if no safe spot found
-    return { x: width / 2, y: height / 2 };
+    return { x: width / 2, y: height / 2 }; // default spawn spot if no safe spot found
 }
 
-let missedCount = 0;
-
-const missedDisplay = document.getElementById("missed");
-
+// count the number of circles that disappear without user click
 function incrementMissed() {
     missedCount++;
     missedDisplay.textContent = `Missed: ${missedCount}`;
 }
 
+// pop effect with small dots 
 function createDotEffect(x, y, color) {
     const dotCount = 10;
     const dotSize = 3;
@@ -87,28 +89,29 @@ function createDotEffect(x, y, color) {
     }, 100);
 }
 
+// choose random color for circles & dots
 function randomColor() {
-    // random bright color
     const hue = Math.floor(Math.random() * 360);
     return `hsl(${hue}, 70%, 60%)`;
 }
 
+// spawn a new circle
 function createCircle() {
+    //find a safe spawn point
     const { x, y } = getSafePosition();
-
+    //create circle element
     const circle = document.createElement("div");
     circle.classList.add("circle");
     circle.style.backgroundColor = randomColor();
-
-    // start small and centered
+    // spawn circle at small size
     const size = 10;
     circle.style.width = `${size}px`;
     circle.style.height = `${size}px`;
     circle.style.left = `${x - size / 2}px`;
     circle.style.top = `${y - size / 2}px`;
-
+    //set circle
     gamespace.appendChild(circle);
-
+    //
     const circleData = {
         element: circle,
         x,
@@ -116,17 +119,17 @@ function createCircle() {
         size,
         growing: true
     };
-
+    //when user clicks, increase score, remove circle, 'pop' effect
     circle.addEventListener("click", () => {
         if (!circleData.growing) return;
         circleData.growing = false;
         incrementScore(Math.floor(circleData.size / 10));
         removeCircle(circleData, true);
     });
-
     circles.push(circleData);
 }
 
+// delete circle when clicked or touched
 function removeCircle(circleData, clicked = false) {
     const color = circleData.element.style.backgroundColor;
     createDotEffect(circleData.x, circleData.y, color);
@@ -137,11 +140,13 @@ function removeCircle(circleData, clicked = false) {
     if (!clicked) incrementMissed();
 }
 
+// track user score
 function incrementScore(amount) {
     score += amount;
     scoreDisplay.textContent = `Score: ${score}`;
 }
 
+// circles appear faster as score increases
 function adjustInterval() {
     if (score < 50) return 1000;
     if (score < 100) return 900;
@@ -163,6 +168,7 @@ function adjustInterval() {
     return 25;
 }
 
+// circles increase in size
 function growCircles() {
     for (const c of circles) {
         if (!c.growing) continue;
@@ -175,7 +181,7 @@ function growCircles() {
         //     continue;
         // }
 
-        // Check if circle edge touches viewport edges or border of gamespace (5px border)
+        // check if circle edge touches viewport edges or border of gamespace (5px border), remove if true
         const radius = newSize / 2;
         if (
             c.x - radius <= 5 ||
@@ -205,6 +211,7 @@ function growCircles() {
             continue;
         }
 
+        //set new circle size
         c.size = newSize;
         c.element.style.width = `${newSize}px`;
         c.element.style.height = `${newSize}px`;
@@ -213,6 +220,7 @@ function growCircles() {
     }
 }
 
+// start game procedures
 function startGame() {
     score = 0;
     scoreDisplay.textContent = `Score: 0`;
@@ -246,12 +254,14 @@ function startGame() {
     requestAnimationFrame(gameLoop);
 }
 
+//circle growing animation
 function gameLoop() {
     if (!gameStarted) return;
     growCircles();
     requestAnimationFrame(gameLoop);
 }
 
+// clean up when 'stop game' button is clicked
 function quitGame() {
     gameStarted = false;
     clearInterval(circleInterval);
@@ -279,22 +289,26 @@ function quitGame() {
     document.getElementById("ui-bar").classList.remove("active");
 }
 
+// start game when startBtn is clicked
 startButton.addEventListener("click", () => {
     startBox.style.display = "none";
     finalScoreBox.style.display = "none";
     startGame();
 });
 
+// end game when 'quitButton' is clicked, but leave app open
 quitButton.addEventListener("click", () => {
     quitGame();
 });
 
+// restart game when 'play again' is clicked
 playAgainButton.addEventListener("click", () => {
     finalScoreBox.style.display = "none";
     startBox.style.display = "none";
     startGame();
 });
 
+// quit app
 finalQuitButton.addEventListener("click", () => {
     window.close();
 });
