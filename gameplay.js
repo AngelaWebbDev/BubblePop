@@ -174,13 +174,6 @@ function growCircles() {
         if (!c.growing) continue;
         let newSize = c.size + 1;
 
-        // max diameter 300
-        // if (newSize > 300) {
-        //     // disappear silently
-        //     removeCircle(c);
-        //     continue;
-        // }
-
         // check if circle edge touches viewport edges or border of gamespace (5px border), remove if true
         const radius = newSize / 2;
         if (
