@@ -16,28 +16,6 @@ const scoreDisplay = document.getElementById("score");
 const startBox = document.getElementById("start-box");
 const startButton = document.getElementById("startBtn");
 
-// circles appear faster as score increases
-function adjustInterval() {
-    if (score < 50) return 1000;
-    if (score < 100) return 900;
-    if (score < 150) return 800;
-    if (score < 200) return 700;
-    if (score < 250) return 600;
-    if (score < 300) return 500;
-    if (score < 400) return 450;
-    if (score < 500) return 400;
-    if (score < 600) return 350;
-    if (score < 700) return 300;
-    if (score < 800) return 250;
-    if (score < 900) return 200;
-    if (score < 1000) return 150;
-    if (score < 1100) return 100;
-    if (score < 1200) return 75;
-    if (score < 1300) return 50;
-    if (score < 1400) return 25;
-    return 25;
-}
-
 // spawn a new circle
 function createCircle() {
     //find a safe spawn point
@@ -111,7 +89,7 @@ function gameLoop() {
 }
 
 // prevent spawning near other circles on screen (previous 5 spawns)
-function getSafePosition(minDistance = 50, maxAttempts = 100) {
+function getSafePosition(minDistance=50, maxAttempts=100) {
     const width = gamespace.clientWidth;
     const height = gamespace.clientHeight;
     const borderBuffer = 100;
@@ -243,35 +221,36 @@ function removeCircle(circleData, clicked = false) {
     if (!clicked) incrementMissed();
 }
 
+//
+function scheduleNextSpawn() {
+    if (!gameStarted) return;
+    if (score < 50) {
+        if (circles.length === 0) createCircle();
+    } else {
+        createCircle();
+    }
+    circleInterval = setTimeout(scheduleNextSpawn, 1000);
+}
+
 // start game procedures
 function startGame() {
     score = 0;
+    missedCount = 0;
     scoreDisplay.textContent = `Score: 0`;
+    missedDisplay.textContent = 'Missed: 0';
     recentPositions = [];
+
     circles.forEach(c => {
         if (c.element.parentElement) c.element.parentElement.removeChild(c.element);
     });
     circles = [];
+    
     gameStarted = true;
     document.getElementById("ui-bar").classList.add("active");
 
-    if (circleInterval) clearInterval(circleInterval);
+    if (circleInterval) clearTimeout(circleInterval);
 
-    circleInterval = setInterval(() => {
-        if (score < 500) {
-            if (circles.length === 0) createCircle();
-        } else {
-            createCircle();
-        }
-        clearInterval(circleInterval);
-        circleInterval = setInterval(() => {
-            if (score < 500) {
-                if (circles.length === 0) createCircle();
-            } else {
-                createCircle();
-            }
-        }, adjustInterval());
-    }, adjustInterval());
+    scheduleNextSpawn();
 
     // Animation loop for growth
     requestAnimationFrame(gameLoop);
