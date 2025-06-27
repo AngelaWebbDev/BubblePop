@@ -68,11 +68,11 @@
         box-sizing: border-box;
         overflow: hidden;
         background-color: black;
-        --border: 5px solid transparent;
+        /* --border: 5px solid transparent;
         --gradient: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
         border: var(--border);
         border-image-slice: 1;
-        border-image-source: var(--gradient);
+        border-image-source: var(--gradient); */
         z-index: 1000;
     }
 
@@ -105,9 +105,9 @@
         justify-content: center;
         align-items: center;
         box-sizing: border-box;
-        border: var(--border);
+        /* border: var(--border);
         border-image-slice: 1;
-        border-image-source: var(--gradient);
+        border-image-source: var(--gradient); */
     }
 
     #final-score-box {
