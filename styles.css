@@ -74,9 +74,10 @@ html, body {
     text-align: center;
     overflow: hidden;
     background-color: black;
-    border: 5px solid transparent;
+    /* border: 5px solid transparent;
     border-image-slice: 1;
-    border-image-source: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    border-image-source: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet); */
+    border: 5px solid gray;
     color: green;
 }
 
