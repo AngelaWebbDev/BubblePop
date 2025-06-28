@@ -1,5 +1,8 @@
-clean it up
-fix the z-index numbering
+add two other "dot effects" to simulate sparkling, 
+    three different patterns
+    each appears in sequence
+    space appearances 5(?)ms apart
+at end of game, cover background with circles, remove these when game restarts
 
 ?   start large, shrink, higher score for clicking as late as possible
 
