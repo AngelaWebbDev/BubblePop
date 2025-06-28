@@ -1,7 +1,7 @@
 let circleInterval = null;
 let circles = [];
 let gameStarted = false;
-let missedCount = 0;
+// let missedCount = 0;
 let recentPositions = [];
 let score = 0;
 
@@ -9,7 +9,7 @@ const finalQuitButton = document.getElementById("final-quit");
 const finalScoreBox = document.getElementById("final-score-box");
 const finalScoreValue = document.getElementById("final-score-value");
 const gamespace = document.getElementById("gamespace");
-const missedDisplay = document.getElementById("missed");
+// const missedDisplay = document.getElementById("missed");
 const playAgainButton = document.getElementById("play-again");
 const stopGameBtn = document.getElementById("stopGame");
 const scoreDisplay = document.getElementById("score");
@@ -156,10 +156,10 @@ function growCircles() {
 }
 
 // count the number of circles that disappear without user click
-function incrementMissed() {
-    missedCount++;
-    missedDisplay.textContent = `Missed: ${missedCount}`;
-}
+// function incrementMissed() {
+//     missedCount++;
+//     missedDisplay.textContent = `Missed: ${missedCount}`;
+// }
 
 // track user score
 function incrementScore(amount) {
@@ -218,7 +218,7 @@ function removeCircle(circleData, clicked = false) {
         circleData.element.parentElement.removeChild(circleData.element);
     }
     circles = circles.filter(c => c !== circleData);
-    if (!clicked) incrementMissed();
+    // if (!clicked) incrementMissed();
 }
 
 //
@@ -235,9 +235,9 @@ function scheduleNextSpawn() {
 // start game procedures
 function startGame() {
     score = 0;
-    missedCount = 0;
+    // missedCount = 0;
     scoreDisplay.textContent = `Score: 0`;
-    missedDisplay.textContent = 'Missed: 0';
+    // missedDisplay.textContent = 'Missed: 0';
     recentPositions = [];
 
     circles.forEach(c => {

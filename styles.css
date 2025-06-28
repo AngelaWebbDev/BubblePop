@@ -14,7 +14,7 @@ html, body {
     height: 50px;
     box-sizing: border-box;
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     align-items: center;
     background-color: black;
     padding: 0 20px;
@@ -26,13 +26,13 @@ html, body {
     visibility: visible;
 }
 
-#missed {  
-    /* missed circles count in top bar */
+/* #missed {  
+    missed circles count in top bar
     color: #bb4f4f;
     font-size: 1rem;
     font-weight: bold;
     user-select: none;
-}
+} */
 
 #score {
     /* score tracker in top bar */
@@ -74,10 +74,7 @@ html, body {
     text-align: center;
     overflow: hidden;
     background-color: black;
-    /* border: 5px solid transparent;
-    border-image-slice: 1;
-    border-image-source: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet); */
-    border: 5px solid gray;
+    border: 10px solid rgb(0, 84, 0);
     color: green;
 }
 
